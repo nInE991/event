@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
@@ -84,6 +85,9 @@
          <font>
             <Font size="13.0" />
          </font>
+         <tooltip>
+            <Tooltip text="Look at graph of function that starting point x0 is not on estremum point or to right of extremum point!" />
+         </tooltip>
       </Button>
       <Button layoutX="242.0" layoutY="258.0" mnemonicParsing="false" onAction="#ButtonClean" prefHeight="29.0" prefWidth="96.0" text="Clean">
          <font>
