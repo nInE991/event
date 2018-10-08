@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="415.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="415.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <Label layoutX="53.0" layoutY="40.0" text="Function f(x)">
          <font>
@@ -40,7 +40,7 @@
             <Font size="13.0" />
          </font>
       </TextField>
-      <TextField fx:id="toleranceForm" layoutX="199.0" layoutY="105.0" text="0.0001">
+      <TextField fx:id="toleranceForm" layoutX="199.0" layoutY="105.0" text="1e-4">
          <font>
             <Font size="13.0" />
          </font>
@@ -90,7 +90,7 @@
             <Font size="13.0" />
          </font>
       </Button>
-      <Label fx:id="resultLabelForm" layoutX="42.0" layoutY="481.0" prefHeight="17.0" prefWidth="344.0" text="result label">
+      <Label fx:id="resultLabelForm" layoutX="42.0" layoutY="481.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="344.0" text="result label" wrapText="true">
          <font>
             <Font size="13.0" />
          </font>

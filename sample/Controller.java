@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 
 import java.io.File;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
@@ -14,6 +15,7 @@ import java.util.concurrent.CountDownLatch;
 public class Controller {
     private List list;
     private Boolean min = true;
+    int cond = 0;
     @FXML
     private TextField functionForm;
     @FXML
@@ -77,6 +79,7 @@ public class Controller {
             @Override
             protected Object call() {
                 try{
+                    cond=0;
                     Method method = new Method();
                     method.startTime=System.currentTimeMillis();
                     if (functionForm.getText().isEmpty()) {
@@ -120,8 +123,9 @@ public class Controller {
                     method.functionx0 = new Expression(method.function).with(method.perem,method.x0).eval();
                     method.functionx1 = new Expression(method.function).with(method.perem,method.x1).eval();
                     if(min && method.functionx0.compareTo(method.functionx1)<0||!min && method.functionx0.compareTo(method.functionx1)>0){
-                        throw new Exception("The starting point is at the extremum or to the right of the  extremum!");
-                        }
+                        cond=1;
+                        throw new Exception("It means that ESM can't find extremum or Initial point x0 may be a solution or may be the Initial point is placed in the right-of-solution x* !");
+                    }
                     method.latch = new CountDownLatch(1);
                     while (method.x1.subtract(method.x0).abs().compareTo(method.tol) == 0 && method.cond==0){
                         if (method.latch.getCount() != 1) {
@@ -191,7 +195,7 @@ public class Controller {
                         method.resultTime = System.currentTimeMillis() - method.startTime;
                         resultXForm.setText(String.valueOf(method.x1));
                         resultFunctionXForm.setText(String.valueOf(method.functionx1));
-                        resultAbsForm.setText(String.valueOf(method.x1.subtract(method.x0.subtract(method.tol)).abs()));
+                        resultAbsForm.setText(String.valueOf(method.x1.subtract(method.x0.subtract(method.tol)).abs().doubleValue()));
                         resultIterationForm.setText(String.valueOf(method.iter));
                         resultTimeForm.setText(String.valueOf(method.resultTime));
                         progressIndicatorForm.setVisible(false);
@@ -209,7 +213,11 @@ public class Controller {
                             progressIndicatorForm.setVisible(false);
                             Alert alert = new Alert(Alert.AlertType.ERROR);
                             alert.setTitle("Error Dialog");
-                            alert.setHeaderText("Error !!! ");
+                            if(cond==1){
+                                alert.setHeaderText("Attention !!! ");
+                            }else {
+                                alert.setHeaderText("Error !!! ");
+                            }
                             alert.setContentText(String.valueOf(ex.getMessage()));
                             alert.showAndWait();
                             resultLabelForm.setText(String.valueOf(ex.getMessage()));

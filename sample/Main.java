@@ -12,7 +12,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Event Search Method");
-        primaryStage.setScene(new Scene(root, 415, 510));
+        primaryStage.setScene(new Scene(root, 415, 540));
         primaryStage.show();
     }
 
